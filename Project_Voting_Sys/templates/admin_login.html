@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles and Background (Reusing the theme) */
+    :root {
+      --main-bg-color: #ebf5f9; 
+      --text-color: #4a6c82;
+      --shadow-light: #ffffff;
+      --shadow-dark: #c8d8e7;
+      --accent-color: #f39c12; /* Using the Admin Orange as the primary color for this page */
+      --secondary-accent: #007bff; /* Primary blue for secondary elements */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--main-bg-color); 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: var(--text-color); 
+      padding: 20px;
+    }
+
+    /* Neumorphic Container */
+    .container {
+      background-color: var(--main-bg-color); 
+      padding: 50px 40px;
+      border-radius: 25px; 
+      width: 100%;
+      max-width: 420px;
+      /* Neumorphism shadows: light on top-left, dark on bottom-right */
+      box-shadow: 
+        10px 10px 20px var(--shadow-dark), 
+        -10px -10px 20px var(--shadow-light);
+      transition: all 0.4s ease;
+      text-align: center; /* Center-align logo and button */
+    }
+
+    /* Container Header */
+    .container h1 {
+      text-align: center;
+      margin-bottom: 35px;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent-color); /* Orange header */
+      letter-spacing: 0.5px;
+    }
+
+    /* Form Labels */
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-color);
+      text-align: left; /* Align labels to the left */
+    }
+
+    /* Input Fields - Inset Neumorphism */
+    input[type="text"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 15px;
+      font-size: 16px;
+      background-color: var(--main-bg-color); 
+      color: #333;
+      box-sizing: border-box;
+      /* Inset shadows for a pressed/concave effect */
+      box-shadow: 
+        inset 4px 4px 8px var(--shadow-dark), 
+        inset -4px -4px 8px var(--shadow-light);
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      /* Subtle change on focus for better usability */
+      box-shadow: 
+        inset 2px 2px 5px var(--shadow-dark), 
+        inset -2px -2px 5px var(--shadow-light),
+        0 0 5px rgba(243, 156, 18, 0.5); /* Small accent glow (Orange) */
+      background-color: var(--shadow-light);
+    }
+    
+    /* Submit Button - Extruded Neumorphism */
+    input[type="submit"] {
+      margin-top: 35px;
+      width: 100%;
+      padding: 15px;
+      background-color: var(--accent-color); /* Bright Orange */
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      /* Stronger box-shadow for a prominent, extruded button */
+      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+    }
+
+    input[type="submit"]:hover {
+      background-color: #d68910; /* Darker orange on hover */
+      /* Slightly more pronounced extrusion */
+      box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+    }
+    
+    input[type="submit"]:active {
+      /* Inset shadows on click to simulate being pressed */
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+      transform: scale(0.98);
+      background-color: #ba760d;
+    }
+
+    /* Footer Note */
+    .footer-note {
+      text-align: center;
+      font-size: 11px;
+      margin-top: 25px;
+      color: #99aab5;
+    }
+    
+    /* Optional: Back to Home Link */
+    .back-link {
+        display: block;
+        margin-top: 15px;
+        font-size: 14px;
+        color: var(--secondary-accent); /* Use the blue for contrast */
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .back-link:hover {
+        color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="{{ url_for('static', filename='Votify_Logo.png') }}" 
+          alt="Votify Logo" 
+          style="display:block; margin:0 auto 30px; max-width:120px; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1));"> 
+    
+    <h1>Admin Access</h1>
+    
+    <form action="/admin" method="POST">
+      
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required placeholder="Enter admin username" />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required placeholder="Enter secure password" />
+
+      <label for="security-key">Security Key</label>
+      <input type="text" id="security-key" name="security-key" required placeholder="Enter 6-digit security key" pattern="\d{6}" maxlength="6" />
+
+      <input type="submit" value="Login to Dashboard" />
+    </form>
+    
+    <a href="/" class="back-link">← Back to Portal Home</a>
+    
+    <div class="footer-note">🔑 Restricted access for system administrators only.</div>
+  </div>
+</body>
+</html>

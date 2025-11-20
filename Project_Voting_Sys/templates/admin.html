@@ -1,0 +1,180 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vote Count Admin Panel</title>
+  <style>
+    /* ... (Keep your existing CSS here, it remains unchanged) ... */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),
+        url('/static/Indian_Flag.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: right center;
+      animation: waveBG 20s infinite ease-in-out;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes waveBG {
+      0% { background-position: right center; }
+      50% { background-position: left center; }
+      100% { background-position: right center; }
+    }
+
+    .emblem {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 80px;
+      height: auto;
+      opacity: 0.9;
+      z-index: 2;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(2px);
+      z-index: 2;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #1a3c6e;
+      font-size: 28px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background-color: #1a3c6e;
+      color: #fff;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Dummy Party CSS for distinction */
+    .dummy-party {
+        color: #666; /* Subtle color for dummy data */
+        font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      td {
+        position: relative;
+        padding-left: 50%;
+        border: none;
+        border-bottom: 1px solid #eee;
+      }
+
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 18px;
+        font-weight: bold;
+        color: #555;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <img class="emblem" src="{{ url_for('static', filename='Votify_Logo.png') }}"  alt="Votify_Logo" />
+  
+  <div class="container">
+    <h1>🇮🇳 Live Vote Count Dashboard</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Leader Name</th>
+          <th>Party </th>
+          <!-- <th>Votes Received (Dummy)</th> -->
+          <th>Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {# Loop through the data passed from your Flask route #}
+        {% for vote_data in vote_percentages %}
+        <tr>
+          {# Leader Name from the database #}
+          <td data-label="Leader Name">{{ vote_data.leader | capitalize }}</td>
+          
+          {# Party: Using dummy data since it's not in your backend logic #}
+          <td data-label="Party" class="dummy-party">
+              {% if vote_data.leader == 'modi' %}
+                  Bhartiya Janta Party
+              {% elif vote_data.leader == 'rahul' %}
+                  The Indian National Congress
+              {% elif vote_data.leader == 'mamta' %}
+                  Trinamool congress 
+              {% elif vote_data.leader == 'nota' %}
+                  None Of The Above
+              {% else %}
+                  Independent D
+              {% endif %}
+          </td>
+
+          {# Votes Received: Using dummy data (you're only passing percentages) #}
+          <!-- <td data-label="Votes Received (Dummy)" class="dummy-party">
+            N/A
+          </td> -->
+          
+          {# Percentage from the database #}
+          <td data-label="Percentage">{{ vote_data.percentage }}%</td>
+        </tr>
+        {% endfor %}
+
+        {# Optional: Add a row for the total number of votes if needed #}
+        {% if vote_percentages is not none and vote_percentages|length > 0 %}
+        <tr style="font-weight: bold; background-color: #e0f7fa;">
+          <td data-label="Total" colspan="2">Total Valid Votes (Approximate)</td>
+          <td data-label="Total Percentage">100.0%</td>
+        </tr>
+        {% endif %}
+
+        {# Fallback for no data #}
+        {% if vote_percentages is none or vote_percentages|length == 0 %}
+        <tr>
+          <td colspan="3" style="text-align: center;">No vote data found in the database.</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

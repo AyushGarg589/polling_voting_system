@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voter/Admin Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles and Background (Copied from your theme) */
+    :root {
+      /* Define a single, soft background color variable */
+      --main-bg-color: #ebf5f9; 
+      --text-color: #4a6c82;
+      --shadow-light: #ffffff;
+      --shadow-dark: #c8d8e7;
+      --accent-color: #007bff; /* Primary blue for action */
+      --admin-color: #f39c12; /* A contrasting color for Admin login (Orange) */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--main-bg-color); 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: var(--text-color); 
+      padding: 20px;
+    }
+
+    /* Neumorphic Container (Copied from your theme) */
+    .container {
+      background-color: var(--main-bg-color); 
+      padding: 50px 40px;
+      border-radius: 25px; 
+      width: 100%;
+      max-width: 420px;
+      /* Neumorphism shadows: light on top-left, dark on bottom-right */
+      box-shadow: 
+        10px 10px 20px var(--shadow-dark), 
+        -10px -10px 20px var(--shadow-light);
+      transition: all 0.4s ease;
+      text-align: center; /* Center-align all content inside */
+    }
+
+    /* Container Header (Copied from your theme) */
+    .container h1 {
+      text-align: center;
+      margin-bottom: 35px;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent-color); 
+      letter-spacing: 0.5px;
+    }
+
+    /* --- New Button Styles for the Options --- */
+    .option-button {
+      display: block; /* Make buttons take up full width */
+      margin: 20px auto; /* Vertical margin for spacing */
+      width: 100%;
+      padding: 15px;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none; /* Remove underline for anchor tags */
+      transition: all 0.3s ease;
+      /* Stronger box-shadow for a prominent, extruded button */
+      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+    }
+
+    /* Style for the Voter Button (Primary Accent) */
+    .voter-button {
+      background-color: var(--accent-color); /* Bright blue */
+    }
+
+    .voter-button:hover {
+      background-color: #0069d9; 
+      box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+    }
+    
+    .voter-button:active {
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+      transform: scale(0.98);
+      background-color: #0056b3;
+    }
+
+    /* Style for the Admin Button (Secondary Accent) */
+    .admin-button {
+      background-color: var(--admin-color); /* Orange for admin */
+      margin-top: 30px; /* Extra spacing above admin button */
+    }
+    
+    .admin-button:hover {
+      background-color: #d68910; 
+      box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+    }
+    
+    .admin-button:active {
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+      transform: scale(0.98);
+      background-color: #ba760d;
+    }
+
+    /* Footer Note (Copied from your theme) */
+    .footer-note {
+      text-align: center;
+      font-size: 11px;
+      margin-top: 35px; /* Increased top margin for separation */
+      color: #99aab5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="{{ url_for('static', filename='Votify_Logo.png') }}" 
+          alt="Votify Logo" 
+          style="display:block; margin:0 auto 30px; max-width:120px; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1));"> 
+    
+    <h1>Welcome to the Voting Portal</h1>
+    
+    <a href="/login" class="option-button voter-button">
+       Register as a Voter
+    </a>
+    
+    <a href="/admin_login" class="option-button admin-button">
+       Login as an Admin
+    </a>
+
+    <div class="footer-note">Secure portal powered by **Votify**.</div>
+  </div>
+</body>
+</html>

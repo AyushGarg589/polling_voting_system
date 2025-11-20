@@ -1,0 +1,11 @@
+requests
+flask
+numpy
+pandas
+scipy
+matplotlib
+scikit-learn
+tensorflow
+torch
+pyautogui
+opencv-python

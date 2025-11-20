@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Thank You for Voting</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(270deg, #138808, #ffffff, #ff9933);
+    background-size: 600% 600%;
+    animation: waveBG 12s ease infinite;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  @keyframes waveBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .card {
+    position: relative;
+    padding: 40px 80px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    text-align: center;
+    animation: fadeIn 1.5s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  h1 {
+    font-size: 3rem;
+    color: #000080;
+    text-shadow: 0 0 15px rgba(0,0,0,0.4);
+    animation: glow 2s ease-in-out infinite alternate;
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 10px #000080, 0 0 20px #000080; }
+    to { text-shadow: 0 0 20px #000080, 0 0 40px #000080; }
+  }
+
+  /* Ashoka Chakra */
+  .chakra {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120px;
+    height: 120px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/1/17/Ashoka_Chakra.svg') no-repeat center/contain;
+    transform: translate(-50%, -50%);
+    animation: spin 10s linear infinite;
+    opacity: 0.2;
+    z-index: 1;
+  }
+
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="chakra"></div>
+    <h1>Thank You for Voting 🇮🇳</h1>
+  </div>
+</body>
+</html>

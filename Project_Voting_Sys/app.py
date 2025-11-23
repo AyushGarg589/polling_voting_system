@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'Votify_key@123'
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Ayushaggarwal@09'
+app.config['MYSQL_PASSWORD'] = 'your_db_password'
 app.config['MYSQL_DB'] = 'vote_data'
 
 
@@ -196,5 +196,6 @@ if __name__ == '__main__':
 #                 flash('Welcome! Please cast your vote now.', 'success')
 #                 cur.close()
 #                 return redirect(url_for('vote'))
+
 
 

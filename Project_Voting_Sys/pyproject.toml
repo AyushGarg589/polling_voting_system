@@ -1,0 +1,23 @@
+[project]
+name = "polling-voting-system"
+version = "0.1.0"
+description = "A Flask-based polling and voting system using MySQL"
+authors = [
+    {name = "Ayush Garg", email = "ayushaggarwal276@gmail.com"},
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.9"
+
+# Dependencies taken from your existing requirements.txt
+# Note: 'flask_mysqldb' is listed as 'Flask-MySQLDB' on PyPI
+dependencies = [
+    "flask",
+    "Flask-MySQLDB",
+    "requests",
+    "gunicorn", # Required for Vercel to serve the Flask app
+]
+
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
